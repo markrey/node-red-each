@@ -1,0 +1,100 @@
+<script type="text/x-red" data-template-name="each">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="each">
+	<p>Iterates all msg.payload items until hit with a next node</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('each',{
+        color:"#ececec",
+        category: 'function',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name || "each";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="next">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="next">
+	<p>Closes an each node loop</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('next',{
+        color:"#ececec",
+        category: 'function',
+        defaults: {
+            name: {value:""},
+            eachNode: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name || "end";
+        },
+    });
+</script>
+
+<script type="text/x-red" data-template-name="break">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-eachNode"><i class="icon-tag"></i> Name</label>
+        <select type="text" id="node-input-eachNode">
+            <option value=""></option>
+        </select>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="break">
+    <p>Closes an each node loop</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('break',{
+        color:"#ececec",
+        category: 'function',
+        defaults: {
+            name: {value:""},
+            eachNode: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name || "break";
+        },
+        oneditprepare: function() {
+             //fill combobox with functions type reuse
+            var nodes = RED.nodes.nodes;
+            var that = this;
+            nodes.forEach(function(n){
+                if(n.type=="each") {
+                    $('#node-input-eachNode').append($('<option>', 
+                        { value : n.id , selected : that.eachNode == n.id}).text(n.name));
+                }
+            });
+        }
+    });
+</script>
+

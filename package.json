@@ -1,10 +1,10 @@
 {
-  "name": "nodes-each",
+  "name": "node-red-each",
   "version": "0.0.1",
   "description":"nodes-each",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gkstack/nodes-each"
+    "url": "https://github.com/gkstack/node-red-each"
   },
   "dependencies": {
   },
